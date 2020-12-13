@@ -9,7 +9,7 @@
    Written by Phil Burgess / Paint Your Dragon for Adafruit Industries.
    BSD license, all text above must be included in any redistribution. */
 
-#include <python2.7/Python.h>
+#include <python3.7/Python.h>
 
 static PyObject *convert(PyObject *self, PyObject *args) {
 	Py_buffer      inBuf, outBuf;
@@ -72,7 +72,19 @@ static PyMethodDef yuv2rgb_methods[] = {
 	{NULL,NULL}
 };
 
-PyMODINIT_FUNC inityuv2rgb(void) {
-	(void)Py_InitModule("yuv2rgb", yuv2rgb_methods);
+static struct PyModuleDef moduledef = {
+	PyModuleDef_HEAD_INIT,
+	"yuv2rgb",     /* m_name */
+	"YUV->RGB conversion for Raspberry Pi camera",  /* m_doc */
+	-1,                  /* m_size */
+	yuv2rgb_methods,     /* m_methods */
+	NULL,                /* m_reload */
+	NULL,                /* m_traverse */
+	NULL,                /* m_clear */
+	NULL,                /* m_free */
+};
+
+PyMODINIT_FUNC PyInit_yuv2rgb(void) {
+	(void)PyModule_Create(&moduledef);
 }
 

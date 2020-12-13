@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # Point-and-shoot camera for Raspberry Pi w/camera and Adafruit PiTFT.
 # This must run as root (sudo python cam.py) due to framebuffer, etc.
 #
@@ -22,8 +23,11 @@
 # Written by Phil Burgess / Paint Your Dragon for Adafruit Industries.
 # BSD license, all text above must be included in any redistribution.
 
+# 2020: Updates for Python 3.7 compatibility by AMV
+
+
 import atexit
-import cPickle as pickle
+import pickle
 import errno
 import fnmatch
 import io
@@ -86,7 +90,7 @@ class Button:
 	  self.fg       = None # Foreground Icon name
 	  self.callback = None # Callback function
 	  self.value    = None # Value passed to callback
-	  for key, value in kwargs.iteritems():
+	  for key, value in kwargs.items():
 	    if   key == 'color': self.color    = value
 	    elif key == 'bg'   : self.bg       = value
 	    elif key == 'fg'   : self.fg       = value
@@ -447,7 +451,7 @@ def takePicture():
 	      stat.S_IROTH | stat.S_IXOTH)
 	  except OSError as e:
 	    # errno = 2 if can't create folder
-	    print errno.errorcode[e.errno]
+	    print( errno.errorcode[e.errno])
 	    return
 
 	# If this is the first time accessing this directory,
@@ -561,7 +565,7 @@ gid = int(s) if s else os.getgid()
 
 # Buffers for viewfinder data
 rgb = bytearray(320 * 240 * 3)
-yuv = bytearray(320 * 240 * 3 / 2)
+yuv = bytearray(320 * 240 * 3 // 2)
 
 # Init pygame and screen
 pygame.init()
