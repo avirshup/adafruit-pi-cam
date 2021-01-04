@@ -3,3 +3,6 @@
 *.pyc
 *.pyo
 __pycache__
+hypriot-boot/user-data
+.idea
+*.egg_info

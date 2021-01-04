@@ -1,2 +1,7 @@
+attrs==20.3.0
+cattrs==1.1.2
+click==7.1.2
+evdev==1.3.0
 picamera==1.13
-pygame==2.0.0
+pygame==1.9.4  # do not use pip, use `apt-get install python3-pygame=1.9.4.post1`
+sortedcontainers==2.3.0
